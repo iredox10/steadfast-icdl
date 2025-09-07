@@ -73,12 +73,13 @@ function Header({ active, onNavigate }) {
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
         <button
-          className="flex items-center gap-2 text-buk focus-ring"
+          className="flex items-center gap-3 text-buk focus-ring"
           onClick={() => goto('home')}
           aria-label="BUK ICDL Home"
         >
-          <FaUniversity className="h-6 w-6" />
-          <span className="text-base font-semibold tracking-tight">BUK ICDL</span>
+          <img src="/buk-logo.png" alt="Bayero University Kano logo" className="h-8 w-auto" loading="eager" />
+          <span className="hidden h-6 w-px bg-gray-300 sm:inline-block" />
+          <img src="/icdl.jpeg" alt="ICDL logo" className="hidden h-7 w-auto sm:inline-block" loading="eager" />
         </button>
 
         {/* Desktop nav */}
@@ -130,9 +131,10 @@ function Footer({ onNavigate }) {
     <footer className="mt-16 border-t border-gray-200 bg-gray-50">
       <div className="container grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 text-buk">
-            <FaUniversity className="h-6 w-6" />
-            <span className="text-base font-semibold">BUK ICDL</span>
+          <div className="flex items-center gap-3 text-buk">
+            <img src="/buk-logo.png" alt="BUK" className="h-8 w-auto" />
+            <span className="hidden h-6 w-px bg-gray-300 sm:inline-block" />
+            <img src="/icdl.jpeg" alt="ICDL" className="hidden h-7 w-auto sm:inline-block" />
           </div>
           <p className="mt-3 text-sm text-gray-700">Bayero University, Kano — ICDL Accredited Test Centre.</p>
         </div>
@@ -180,6 +182,13 @@ function HomePage({ onNavigate }) {
           <div className="max-w-3xl">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Get Certified with ICDL at Bayero University, Kano</h1>
             <p className="mt-3 text-white/90 text-sm sm:text-base">Build globally recognized digital skills. Learn, practice, and certify at our ICDL Accredited Test Centre.</p>
+            {/* Partner badge */}
+            <div className="mt-4 inline-flex items-center gap-3 rounded-lg bg-white/95 px-3 py-2 text-xs text-buk shadow-sm">
+              <img src="/buk-logo.png" alt="BUK" className="h-6 w-auto" />
+              <span className="h-4 w-px bg-gray-300" />
+              <img src="/icdl.jpeg" alt="ICDL" className="h-5 w-auto" />
+              <span className="ml-1 font-medium">Accredited Test Centre</span>
+            </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <button onClick={() => onNavigate('register')} className="btn btn-light focus-ring bg-white text-buk hover:bg-white/90">Register Now</button>
               <button onClick={() => onNavigate('courses')} className="btn btn-outline focus-ring border-white text-white hover:bg-white/10">View Courses</button>
