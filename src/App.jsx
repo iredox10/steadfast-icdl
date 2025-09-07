@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FaUniversity, FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaUniversity, FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaStar, FaQuoteLeft } from 'react-icons/fa'
 import { HiAcademicCap } from 'react-icons/hi2'
 import { AiOutlineSafety } from 'react-icons/ai'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
@@ -15,6 +15,30 @@ const MODULES = [
   { code: 'ITC', title: 'IT Security', fee: 6000, description: 'Stay safe online—best practices for devices, data, and networks.' },
   { code: 'PCM', title: 'Project Planning', fee: 7000, description: 'Plan, schedule, and monitor projects with modern tools.' },
 ]
+
+// Data: Staff and Testimonials
+const STAFF = [
+  { name: 'Dr. Amina Bello', role: 'Centre Coordinator', email: 'icdl@buk.edu.ng' },
+  { name: 'Engr. Sani Usman', role: 'Lead Instructor', email: 'sani.usman@buk.edu.ng' },
+  { name: 'Mrs. Zainab Ali', role: 'Admin Officer', email: 'zainab.ali@buk.edu.ng' },
+  { name: 'Mr. Ibrahim Musa', role: 'Assessment Officer', email: 'ibrahim.musa@buk.edu.ng' },
+]
+
+const TESTIMONIALS = [
+  { name: 'Hauwa Ibrahim', program: 'ICDL Base Modules', rating: 5, quote: 'The hands-on training and supportive instructors at BUK ICDL helped me pass all modules on the first attempt.' },
+  { name: 'Musa Abdullahi', program: 'Spreadsheets', rating: 4, quote: 'The practice sessions boosted my confidence. The certification added real value to my CV.' },
+  { name: 'Aisha Yusuf', program: 'Word Processing', rating: 5, quote: 'Clear lessons and a well-organized exam process. Highly recommended for students!' },
+]
+
+function initials(name = '') {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+}
 
 // Reusable: Module Card
 function ModuleCard({ code, title, description, fee, onAction }) {
@@ -47,6 +71,43 @@ function FaqItem({ q, a }) {
         <span className="ml-4 text-buk-light">{open ? '−' : '+'}</span>
       </button>
       {open && <p className="mt-2 text-sm text-gray-700">{a}</p>}
+    </div>
+  )
+}
+
+// Reusable: Staff Card
+function StaffCard({ name, role, email }) {
+  return (
+    <div className="card p-5 flex items-center gap-4">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-buk-10 text-buk">
+        <FaUserCircle className="h-8 w-8" aria-hidden="true" />
+      </div>
+      <div className="min-w-0">
+        <p className="truncate font-semibold text-buk">{name}</p>
+        <p className="truncate text-sm text-gray-600">{role}</p>
+        <a href={`mailto:${email}`} className="text-sm text-buk-light hover:underline">{email}</a>
+      </div>
+    </div>
+  )
+}
+
+// Reusable: Testimonial Card
+function TestimonialCard({ name, program, quote, rating = 5 }) {
+  return (
+    <div className="card h-full p-5">
+      <FaQuoteLeft className="h-5 w-5 text-buk-light" aria-hidden="true" />
+      <p className="mt-3 text-sm text-gray-700">{quote}</p>
+      <div className="mt-4 flex items-center justify-between">
+        <div>
+          <p className="font-medium text-buk">{name}</p>
+          <p className="text-xs text-gray-600">{program}</p>
+        </div>
+        <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
+          {[1,2,3,4,5].map((i) => (
+            <FaStar key={i} className={`h-4 w-4 ${i <= rating ? 'text-buk-light' : 'text-gray-300'}`} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -228,6 +289,32 @@ function HomePage({ onNavigate }) {
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {preview.map(m => (
             <ModuleCard key={m.code} {...m} onAction={() => onNavigate('register')} />
+          ))}
+        </div>
+      </section>
+
+      {/* Staff */}
+      <section className="container py-10">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold text-buk">Meet Our Team</h2>
+          <p className="text-sm text-gray-600">Certified, friendly, and here to help you succeed.</p>
+        </div>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {STAFF.map((s) => (
+            <StaffCard key={s.email} {...s} />
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="container py-10">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold text-buk">What Candidates Say</h2>
+          <p className="text-sm text-gray-600">Real experiences from our centre.</p>
+        </div>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {TESTIMONIALS.map((t, i) => (
+            <TestimonialCard key={i} {...t} />
           ))}
         </div>
       </section>
