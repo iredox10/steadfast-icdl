@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FaUniversity, FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaStar, FaQuoteLeft } from 'react-icons/fa'
+import { FaUniversity, FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaStar, FaQuoteLeft, FaClock, FaCertificate, FaUsers, FaLaptop, FaShieldAlt } from 'react-icons/fa'
 import { HiAcademicCap } from 'react-icons/hi2'
 import { AiOutlineSafety } from 'react-icons/ai'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
@@ -111,6 +111,26 @@ function TestimonialCard({ name, program, quote, rating = 5 }) {
     </div>
   )
 }
+
+// Reusable: Why Choose Us Card
+function WhyCard({ Icon, title, text }) {
+  return (
+    <div className="card h-full p-6">
+      <Icon className="h-8 w-8 text-buk-light" aria-hidden="true" />
+      <h3 className="mt-3 font-semibold text-buk">{title}</h3>
+      <p className="mt-1 text-sm text-gray-700">{text}</p>
+    </div>
+  )
+}
+
+const WHY_US = [
+  { Icon: FaCertificate, title: 'ICDL Accredited', text: 'Official test centre recognized internationally.' },
+  { Icon: FaUsers, title: 'Expert Instructors', text: 'Certified trainers with real-world experience.' },
+  { Icon: FaClock, title: 'Flexible Scheduling', text: 'Weekday and weekend exam slots.' },
+  { Icon: FaLaptop, title: 'Modern Labs', text: 'Up-to-date systems and software for training and testing.' },
+  { Icon: FaShieldAlt, title: 'Secure Exams', text: 'Proctored testing with strict standards and integrity.' },
+  { Icon: RiMoneyDollarCircleLine, title: 'Affordable Fees', text: 'Student-friendly pricing and value bundles.' },
+]
 
 // Header with sticky nav and mobile menu
 function Header({ active, onNavigate }) {
@@ -302,6 +322,19 @@ function HomePage({ onNavigate }) {
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {STAFF.map((s) => (
             <StaffCard key={s.email} {...s} />
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="container py-10">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold text-buk">Why Choose Us</h2>
+          <p className="text-sm text-gray-600">Clear advantages for your ICDL journey.</p>
+        </div>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {WHY_US.map((item, i) => (
+            <WhyCard key={i} {...item} />
           ))}
         </div>
       </section>
