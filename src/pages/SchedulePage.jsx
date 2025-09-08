@@ -1,16 +1,7 @@
 import { useMemo, useState } from 'react'
+import { SCHEDULE as schedule } from '../data/schedule'
 
 export default function SchedulePage() {
-  // Example data; add more months/years as needed
-  const schedule = [
-    { date: '2025-01-20', time: '10:00', module: 'Computer Essentials', venue: 'ICT Lab A' },
-    { date: '2025-03-05', time: '10:00', module: 'Online Essentials', venue: 'ICT Lab B' },
-    { date: '2025-06-12', time: '10:00', module: 'Word Processing', venue: 'ICT Lab A' },
-    { date: '2025-09-15', time: '10:00', module: 'Computer Essentials', venue: 'ICT Lab A' },
-    { date: '2025-09-22', time: '10:00', module: 'Spreadsheets', venue: 'ICT Lab B' },
-    { date: '2025-10-06', time: '10:00', module: 'Presentation', venue: 'ICT Lab A' },
-    { date: '2026-02-10', time: '10:00', module: 'IT Security', venue: 'ICT Lab A' },
-  ]
 
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 
