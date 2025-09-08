@@ -1,6 +1,9 @@
 import ModuleCard from '../components/ModuleCard'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import Reveal from '../components/Reveal'
+import { FaChevronDown } from 'react-icons/fa'
 import StaffCard from '../components/StaffCard'
 import TestimonialCard from '../components/TestimonialCard'
 import WhyCard from '../components/WhyCard'
@@ -26,7 +29,7 @@ export default function HomePage() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative">
+  <section className="relative">
         {/* Background: gradient overlay + rotating images */}
         <div className="absolute inset-0 -z-10">
           {/* Images layer */}
@@ -48,7 +51,7 @@ export default function HomePage() {
         </div>
 
         <div className="container py-16 sm:py-24 text-white">
-          <div className="max-w-3xl">
+          <motion.div className="max-w-3xl" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Get Certified with ICDL at Bayero University, Kano</h1>
             <p className="mt-3 text-white/90 text-sm sm:text-base">Build globally recognized digital skills. Learn, practice, and certify at our ICDL Accredited Test Centre.</p>
             {/* Partner badge */}
@@ -62,55 +65,81 @@ export default function HomePage() {
               <Link to="/register" className="btn btn-light focus-ring bg-white text-buk hover:bg-white/90">Register Now</Link>
               <Link to="/courses" className="btn btn-outline-light focus-ring">View Courses</Link>
             </div>
-          </div>
+          </motion.div>
+          {/* Scroll cue */}
+          <motion.div
+            className="pointer-events-none absolute left-1/2 bottom-4 -translate-x-1/2 text-white/80"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, 6, 0] }}
+            transition={{ delay: 0.8, duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden
+          >
+            <FaChevronDown className="h-5 w-5" />
+          </motion.div>
         </div>
       </section>
 
       {/* Why Choose Us */}
       <section className="container py-12">
-        <h2 className="text-xl font-semibold text-buk">Why Choose Us?</h2>
+        <Reveal>
+          <h2 className="text-xl font-semibold text-buk">Why Choose Us?</h2>
+        </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WHY_US.map((item, i) => (
-            <WhyCard key={i} {...item} />
+            <Reveal key={i} delay={i * 0.06}>
+              <WhyCard {...item} />
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Module preview */}
       <section className="container py-4">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold text-buk">Core Modules</h2>
-          <Link to="/courses" className="text-sm text-buk-light hover:underline">See all</Link>
-        </div>
+        <Reveal>
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold text-buk">Core Modules</h2>
+            <Link to="/courses" className="text-sm text-buk-light hover:underline">See all</Link>
+          </div>
+        </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {preview.map(m => (
-            <ModuleCard key={m.code} {...m} onActionHref="/register" />
+          {preview.map((m, i) => (
+            <Reveal key={m.code} delay={i * 0.08}>
+              <ModuleCard {...m} onActionHref="/register" />
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Staff */}
       <section className="container py-10">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold text-buk">Meet Our Team</h2>
-          <p className="text-sm text-gray-600">Certified, friendly, and here to help you succeed.</p>
-        </div>
+        <Reveal>
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold text-buk">Meet Our Team</h2>
+            <p className="text-sm text-gray-600">Certified, friendly, and here to help you succeed.</p>
+          </div>
+        </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STAFF.map((s) => (
-            <StaffCard key={s.email} {...s} />
+          {STAFF.map((s, i) => (
+            <Reveal key={s.email} delay={i * 0.08}>
+              <StaffCard {...s} />
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Testimonials */}
       <section className="container py-10">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold text-buk">What Candidates Say</h2>
-          <p className="text-sm text-gray-600">Real experiences from our centre.</p>
-        </div>
+        <Reveal>
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold text-buk">What Candidates Say</h2>
+            <p className="text-sm text-gray-600">Real experiences from our centre.</p>
+          </div>
+        </Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
-            <TestimonialCard key={i} {...t} />
+            <Reveal key={i} delay={i * 0.08}>
+              <TestimonialCard {...t} />
+            </Reveal>
           ))}
         </div>
       </section>

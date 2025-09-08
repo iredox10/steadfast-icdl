@@ -7,7 +7,6 @@ export default function Header() {
   const links = [
     { to: '/', label: 'Home' },
     { to: '/courses', label: 'Courses' },
-    { to: '/register', label: 'Register' },
     { to: '/about', label: 'About' },
     { to: '/schedule', label: 'Schedule' },
     { to: '/faq', label: 'FAQ' },
