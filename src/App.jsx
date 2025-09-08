@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
@@ -8,41 +8,95 @@ import AboutPage from './pages/AboutPage'
 import SchedulePage from './pages/SchedulePage'
 import FaqPage from './pages/FaqPage'
 import ContactPage from './pages/ContactPage'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function App() {
-  const [active, setActive] = useState('home')
-
+  const location = useLocation()
   useEffect(() => {
-    const fromHash = window.location.hash.replace('#', '')
-    if (fromHash) setActive(fromHash)
-    const onHashChange = () => setActive(window.location.hash.replace('#', '') || 'home')
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
-  }, [])
-
-  useEffect(() => {
-    window.location.hash = active
+    // Smooth scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [active])
-
-  function renderPage() {
-    switch (active) {
-      case 'courses': return <CoursesPage onNavigate={setActive} />
-      case 'register': return <RegisterPage />
-      case 'about': return <AboutPage />
-      case 'schedule': return <SchedulePage />
-      case 'faq': return <FaqPage />
-      case 'contact': return <ContactPage />
-      case 'home':
-      default: return <HomePage onNavigate={setActive} />
-    }
-  }
+  }, [location.pathname])
 
   return (
     <div className="flex min-h-full flex-col">
-      <Header active={active} onNavigate={setActive} />
-      <div className="flex-1">{renderPage()}</div>
-      <Footer onNavigate={setActive} />
+      <Header />
+      <div className="flex-1">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={
+                <Page>
+                  <HomePage />
+                </Page>
+              }
+            />
+            <Route
+              path="/courses"
+              element={
+                <Page>
+                  <CoursesPage />
+                </Page>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Page>
+                  <RegisterPage />
+                </Page>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <Page>
+                  <AboutPage />
+                </Page>
+              }
+            />
+            <Route
+              path="/schedule"
+              element={
+                <Page>
+                  <SchedulePage />
+                </Page>
+              }
+            />
+            <Route
+              path="/faq"
+              element={
+                <Page>
+                  <FaqPage />
+                </Page>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <Page>
+                  <ContactPage />
+                </Page>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
+      </div>
+      <Footer />
     </div>
+  )
+}
+
+function Page({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.div>
   )
 }

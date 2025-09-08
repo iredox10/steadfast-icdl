@@ -1,4 +1,6 @@
-export default function ModuleCard({ code, title, description, fee, onAction }) {
+import { Link } from 'react-router-dom'
+
+export default function ModuleCard({ code, title, description, fee, onAction, onActionHref }) {
   return (
     <div className="card h-full p-5 flex flex-col">
       <div className="mb-3 text-xs font-semibold text-buk-light">ICDL • {code}</div>
@@ -6,9 +8,11 @@ export default function ModuleCard({ code, title, description, fee, onAction }) 
       <p className="mt-2 text-sm text-gray-600 flex-1">{description}</p>
       <div className="mt-4 flex items-center justify-between">
         <span className="text-sm font-medium text-gray-700">Fee: ₦{fee.toLocaleString()}</span>
-        {onAction && (
+        {onActionHref ? (
+          <Link to={onActionHref} className="btn btn-outline focus-ring text-sm">Enroll</Link>
+        ) : onAction ? (
           <button className="btn btn-outline focus-ring text-sm" onClick={onAction}>Enroll</button>
-        )}
+        ) : null}
       </div>
     </div>
   )

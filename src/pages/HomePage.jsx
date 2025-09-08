@@ -1,5 +1,6 @@
 import ModuleCard from '../components/ModuleCard'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import StaffCard from '../components/StaffCard'
 import TestimonialCard from '../components/TestimonialCard'
 import WhyCard from '../components/WhyCard'
@@ -8,7 +9,7 @@ import { STAFF } from '../data/staff'
 import { TESTIMONIALS } from '../data/testimonials'
 import { WHY_US } from '../data/whyUs'
 
-export default function HomePage({ onNavigate }) {
+export default function HomePage() {
   const preview = MODULES.slice(0, 4)
   // Rotating hero background images
   const HERO_IMAGES = [
@@ -58,8 +59,8 @@ export default function HomePage({ onNavigate }) {
               <span className="ml-1 font-medium">Accredited Test Centre</span>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button onClick={() => onNavigate('register')} className="btn btn-light focus-ring bg-white text-buk hover:bg-white/90">Register Now</button>
-              <button onClick={() => onNavigate('courses')} className="btn btn-outline-light focus-ring">View Courses</button>
+              <Link to="/register" className="btn btn-light focus-ring bg-white text-buk hover:bg-white/90">Register Now</Link>
+              <Link to="/courses" className="btn btn-outline-light focus-ring">View Courses</Link>
             </div>
           </div>
         </div>
@@ -79,11 +80,11 @@ export default function HomePage({ onNavigate }) {
       <section className="container py-4">
         <div className="flex items-baseline justify-between">
           <h2 className="text-xl font-semibold text-buk">Core Modules</h2>
-          <button onClick={() => onNavigate('courses')} className="text-sm text-buk-light hover:underline">See all</button>
+          <Link to="/courses" className="text-sm text-buk-light hover:underline">See all</Link>
         </div>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {preview.map(m => (
-            <ModuleCard key={m.code} {...m} onAction={() => onNavigate('register')} />
+            <ModuleCard key={m.code} {...m} onActionHref="/register" />
           ))}
         </div>
       </section>

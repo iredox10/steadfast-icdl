@@ -1,8 +1,9 @@
 import { FaStar, FaQuoteLeft } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 
 export default function TestimonialCard({ name, program, quote, rating = 5 }) {
   return (
-    <div className="card h-full p-5">
+    <motion.div whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }} className="card h-full p-5">
       <FaQuoteLeft className="h-5 w-5 text-buk-light" aria-hidden="true" />
       <p className="mt-3 text-sm text-gray-700">{quote}</p>
       <div className="mt-4 flex items-center justify-between">
@@ -16,6 +17,6 @@ export default function TestimonialCard({ name, program, quote, rating = 5 }) {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

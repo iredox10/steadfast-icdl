@@ -1,6 +1,7 @@
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
-export default function Footer({ onNavigate }) {
+export default function Footer() {
   return (
     <footer className="mt-16 border-t border-gray-200 bg-gray-50">
       <div className="container grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -16,9 +17,16 @@ export default function Footer({ onNavigate }) {
         <div>
           <h4 className="text-sm font-semibold text-buk">Quick Links</h4>
           <ul className="mt-3 space-y-2 text-sm">
-            {['home','courses','register','schedule','faq','contact'].map((k) => (
-              <li key={k}>
-                <button onClick={() => onNavigate(k)} className="text-gray-700 hover:text-buk">{k[0].toUpperCase()+k.slice(1)}</button>
+            {[
+              ['/', 'Home'],
+              ['/courses', 'Courses'],
+              ['/register', 'Register'],
+              ['/schedule', 'Schedule'],
+              ['/faq', 'FAQ'],
+              ['/contact', 'Contact'],
+            ].map(([to, label]) => (
+              <li key={to}>
+                <Link to={to} className="text-gray-700 hover:text-buk">{label}</Link>
               </li>
             ))}
           </ul>
