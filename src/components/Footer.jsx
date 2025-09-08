@@ -8,8 +8,8 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3 text-buk">
             <img src="/buk-logo.png" alt="BUK" className="h-8 w-auto" />
-            <span className="hidden h-6 w-px bg-gray-300 sm:inline-block" />
-            <img src="/icdl.jpeg" alt="ICDL" className="hidden h-7 w-auto sm:inline-block" />
+            <span className="h-6 w-px bg-gray-300" />
+            <img src="/icdl.jpeg" alt="ICDL" className="h-7 w-auto" />
           </div>
           <p className="mt-3 text-sm text-gray-700">Bayero University, Kano — ICDL Accredited Test Centre.</p>
         </div>

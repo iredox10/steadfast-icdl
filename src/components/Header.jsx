@@ -23,8 +23,8 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-3 text-buk focus-ring" aria-label="BUK ICDL Home" onClick={closeMenu}>
           <img src="/buk-logo.png" alt="Bayero University Kano logo" className="h-8 w-auto" loading="eager" />
-          <span className="hidden h-6 w-px bg-gray-300 sm:inline-block" />
-          <img src="/icdl.jpeg" alt="ICDL logo" className="hidden h-7 w-auto sm:inline-block" loading="eager" />
+          <span className="h-6 w-px bg-gray-300" />
+          <img src="/icdl.jpeg" alt="ICDL logo" className="h-7 w-auto" loading="eager" />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
