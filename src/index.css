@@ -42,6 +42,9 @@ body {
 .btn-outline:hover { background-color: var(--buk); color: #fff; }
 .btn-light { background: #fff; color: var(--buk); border: 1px solid transparent; }
 .btn-light:hover { background: rgba(255,255,255,0.9); }
+/* Outline for dark backgrounds */
+.btn-outline-light { background: transparent; border: 1px solid #fff; color: #fff; }
+.btn-outline-light:hover { background: rgba(255,255,255,0.1); }
 
 /* Cards */
 .card { border-radius: var(--radius); border: 1px solid #e5e7eb; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }

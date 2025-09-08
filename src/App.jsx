@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FaUniversity, FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaStar, FaQuoteLeft, FaClock, FaCertificate, FaUsers, FaLaptop, FaShieldAlt } from 'react-icons/fa'
-import { HiAcademicCap } from 'react-icons/hi2'
-import { AiOutlineSafety } from 'react-icons/ai'
+import { FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaStar, FaQuoteLeft, FaClock, FaCertificate, FaUsers, FaLaptop, FaShieldAlt } from 'react-icons/fa'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 
 // Data: ICDL Modules
@@ -29,16 +27,6 @@ const TESTIMONIALS = [
   { name: 'Musa Abdullahi', program: 'Spreadsheets', rating: 4, quote: 'The practice sessions boosted my confidence. The certification added real value to my CV.' },
   { name: 'Aisha Yusuf', program: 'Word Processing', rating: 5, quote: 'Clear lessons and a well-organized exam process. Highly recommended for students!' },
 ]
-
-function initials(name = '') {
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase()
-}
 
 // Reusable: Module Card
 function ModuleCard({ code, title, description, fee, onAction }) {
@@ -272,31 +260,19 @@ function HomePage({ onNavigate }) {
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <button onClick={() => onNavigate('register')} className="btn btn-light focus-ring bg-white text-buk hover:bg-white/90">Register Now</button>
-              <button onClick={() => onNavigate('courses')} className="btn btn-outline focus-ring border-white text-white hover:bg-white/10">View Courses</button>
+              <button onClick={() => onNavigate('courses')} className="btn btn-outline-light focus-ring">View Courses</button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose BUK */}
+      {/* Why Choose Us */}
       <section className="container py-12">
-        <h2 className="text-xl font-semibold text-buk">Why Choose BUK?</h2>
+        <h2 className="text-xl font-semibold text-buk">Why Choose Us?</h2>
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="card p-6">
-            <HiAcademicCap className="h-8 w-8 text-buk-light" />
-            <h3 className="mt-3 font-semibold text-buk">Accredited Centre</h3>
-            <p className="mt-1 text-sm text-gray-700">Official ICDL testing and training with certified instructors.</p>
-          </div>
-          <div className="card p-6">
-            <AiOutlineSafety className="h-8 w-8 text-buk-light" />
-            <h3 className="mt-3 font-semibold text-buk">Global Standard</h3>
-            <p className="mt-1 text-sm text-gray-700">ICDL is recognized worldwide across academia and industry.</p>
-          </div>
-          <div className="card p-6">
-            <RiMoneyDollarCircleLine className="h-8 w-8 text-buk-light" />
-            <h3 className="mt-3 font-semibold text-buk">Flexible & Affordable</h3>
-            <p className="mt-1 text-sm text-gray-700">Study and test on your schedule with student-friendly fees.</p>
-          </div>
+          {WHY_US.map((item, i) => (
+            <WhyCard key={i} {...item} />
+          ))}
         </div>
       </section>
 
@@ -326,18 +302,7 @@ function HomePage({ onNavigate }) {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="container py-10">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold text-buk">Why Choose Us</h2>
-          <p className="text-sm text-gray-600">Clear advantages for your ICDL journey.</p>
-        </div>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {WHY_US.map((item, i) => (
-            <WhyCard key={i} {...item} />
-          ))}
-        </div>
-      </section>
+  {/* removed duplicate Why Choose Us section */}
 
       {/* Testimonials */}
       <section className="container py-10">
