@@ -22,7 +22,6 @@ export default function SchedulePage() {
   const defaultYear = years.includes(new Date().getFullYear()) ? new Date().getFullYear() : years[0]
   const [year, setYear] = useState(defaultYear)
   const [selectedMonth, setSelectedMonth] = useState(null) // 0-11 or null
-  const [onlyActive, setOnlyActive] = useState(false)
 
   const eventsByMonth = useMemo(() => {
     const map = new Map()
@@ -43,7 +42,7 @@ export default function SchedulePage() {
   return (
     <main className="container py-10">
       <h1 className="text-2xl font-semibold text-buk">Programme Calendar</h1>
-      <p className="mt-2 text-sm text-gray-700">Select a month to view scheduled test sessions. Only months with active sessions are highlighted.</p>
+      <p className="mt-2 text-sm text-gray-700">Select a month to view scheduled test sessions. Only months with active sessions are shown.</p>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <label className="text-sm text-gray-700">Year</label>
@@ -57,34 +56,26 @@ export default function SchedulePage() {
           </button>
         </div>
 
-        <label className="ml-auto inline-flex items-center gap-2 text-sm text-gray-700">
-          <input type="checkbox" className="accent-buk" checked={onlyActive} onChange={e => setOnlyActive(e.target.checked)} />
-          Show active months only
-        </label>
+  {/* Removed toggle; only active months are shown */}
       </div>
 
       {/* Month grid */}
       <div className="mt-4 grid gap-3 sm:grid-cols-3 md:grid-cols-4">
         {months.map((label, idx) => {
           const active = monthHasEvents(year, idx)
-          if (onlyActive && !active) return null
+          if (!active) return null
           const isSelected = selectedMonth === idx
           return (
             <button
               key={idx}
               onClick={() => setSelectedMonth(idx)}
               aria-pressed={isSelected}
-              className={`card w-full p-4 text-left transition-colors ${active ? 'border-buk' : ''} ${isSelected ? 'bg-buk-10' : 'bg-white hover:bg-gray-50'}`}
+              className={`card w-full p-4 text-left transition-colors ${isSelected ? 'bg-buk-10' : 'bg-white hover:bg-gray-50'}`}
             >
               <div className="flex items-center justify-between">
-                <span className={`font-medium ${active ? 'text-buk' : 'text-gray-700'}`}>{label} {year}</span>
-                {active && (
-                  <span className="rounded-full bg-buk-10 px-2 py-0.5 text-xs text-buk">Active</span>
-                )}
+                <span className="font-medium text-buk">{label} {year}</span>
               </div>
-              {active && (
-                <p className="mt-1 text-xs text-gray-600">{(eventsByMonth.get(`${year}-${idx}`) || []).length} session(s)</p>
-              )}
+              <p className="mt-1 text-xs text-gray-600">{(eventsByMonth.get(`${year}-${idx}`) || []).length} session(s)</p>
             </button>
           )
         })}
